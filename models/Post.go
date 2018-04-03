@@ -6,6 +6,6 @@ type Post struct {
 	Content string
 }
 
-func newPost(id, title, content string) *Post {
+func NewPost(id, title, content string) *Post {
 	return &Post{id, title, content}
 }
