@@ -7,5 +7,5 @@ type Post struct {
 }
 
 func newPost(id, title, content string) *Post {
-	return &Post(id, title, content)
+	return &Post{id, title, content}
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"github.com/niazlake/Go-blog/models"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
