@@ -15,7 +15,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprint(w, err.Error())
 	}
-	t.ExecuteTemplate(w, "index", nil)
+	t.ExecuteTemplate(w, "index", posts)
 }
 
 func writeHandler(w http.ResponseWriter, r *http.Request) {
@@ -30,8 +30,9 @@ func savePostHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.FormValue(" title")
 	content := r.FormValue("content")
 
-	post := models.newPost(id, title, content)
+	post := models.NewPost(id, title, content)
 	posts[post.Id] = post
+	fmt.Println(posts[post.Title])
 
 	http.Redirect(w, r, "/", 302)
 }
@@ -39,12 +40,12 @@ func savePostHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	fmt.Println("We listen : 3000! ")
 
-	posts = make(map[string]*models.Post, 0)
+	posts = make(map[string]*models.Post, 2)
 
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets/"))))
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/write", writeHandler)
-	http.HandleFunc("/savePost", savePostHandler)
+	http.HandleFunc("/SavePost", savePostHandler)
 
 	http.ListenAndServe(":3000", nil)
 }
